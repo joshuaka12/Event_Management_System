@@ -1,0 +1,19 @@
+<?php
+require_once __DIR__ . '/../auth/auth.php';
+require_once __DIR__ . '/../config/db.php';
+require_login('admin');
+
+$id = (int)($_GET['id'] ?? 0);
+if ($id) {
+    $conn = db_connect();
+    $stmt = $conn->prepare("UPDATE events SET status='approved' WHERE id=? AND deleted_at IS NULL");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
+    set_flash('success', 'Event approved.');
+} else {
+    set_flash('error', 'Invalid event.');
+}
+header('Location: ' . base_url('admin/dashboard.php'));
+exit;
