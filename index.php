@@ -357,7 +357,7 @@ require_once __DIR__ . '/includes/header.php';
         <p>Discover workshops, seminars, cultural nights, career fairs and more happening across campus.</p>
         <?php if (!is_logged_in()): ?>
         <div class="hero-actions">
-            <a href="<?= base_url('register.php') ?>" class="btn btn-primary"><i class="fas fa-user-plus me-1"></i> Join Now — It's Free</a>
+            <a href="<?= base_url('register.php') ?>" class="btn btn-primary"><i class="fas fa-user-plus me-1"></i> Join Us Now — It's Free</a>
             <a href="<?= base_url('login.php') ?>" class="btn btn-outline"><i class="fas fa-sign-in-alt me-1"></i> Log In</a>
         </div>
         <?php endif; ?>
