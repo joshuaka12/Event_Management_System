@@ -10,19 +10,20 @@ $flash = get_flash();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($page_title ?? 'Campus EMS') ?> — Campus Event Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ========== COMPLETE STYLES ========== */
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'DM Sans',sans-serif; background:#f8f6f2; color:#1e1b18; line-height:1.65; min-height:100vh; display:flex; flex-direction:column; }
         h1,h2,h3,h4 { font-family:'DM Serif Display',Georgia,serif; font-weight:500; }
         .container { max-width:1240px; margin:0 auto; padding:0 1.5rem; }
         .main-content { flex:1; padding-top:80px; padding-bottom:3rem; }
-        .navbar { position:fixed; top:0; left:0; right:0; height:70px; background:white; border-bottom:1px solid #e8e2dc; z-index:1000; }
+        .navbar { position:fixed; top:0; left:0; right:0; height:70px; background:white; border-bottom:1px solid #e8e2dc; z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
         .nav-container { display:flex; align-items:center; justify-content:space-between; height:100%; max-width:1240px; margin:0 auto; padding:0 1.5rem; }
-        .nav-brand { font-family:'DM Serif Display',serif; font-size:1.5rem; color:#1e1b18; text-decoration:none; }
-        .brand-icon, .brand-accent { color:#c13b2b; }
+        .nav-brand { font-family:'DM Serif Display',serif; font-size:1.5rem; color:#1e1b18; text-decoration:none; display:flex; align-items:center; gap:0.4rem; }
+        .brand-icon { color:#c13b2b; font-size:1.2rem; }
+        .brand-accent { color:#c13b2b; }
         .nav-links { display:flex; align-items:center; gap:0.5rem; list-style:none; }
-        .nav-link { padding:0.4rem 0.8rem; border-radius:30px; color:#4a4540; font-weight:500; font-size:0.9rem; text-decoration:none; }
+        .nav-link { padding:0.4rem 0.8rem; border-radius:30px; color:#4a4540; font-weight:500; font-size:0.9rem; text-decoration:none; transition:all 0.2s; }
         .nav-link:hover { background:#f0ede8; color:#1e1b18; }
         .nav-logout { color:#c13b2b; }
         .nav-user { display:flex; align-items:center; gap:0.5rem; margin-left:0.5rem; }
@@ -81,11 +82,20 @@ $flash = get_flash();
         .back-button-wrapper { max-width:1240px; margin:0 auto; padding:0 1.5rem; margin-top:0.5rem; margin-bottom:1rem; }
         .back-button { display:inline-flex; align-items:center; gap:0.4rem; background:white; border:1px solid #e0dbd4; border-radius:40px; padding:0.4rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:500; color:#4a4540; cursor:pointer; transition:all 0.2s ease; }
         .back-button:hover { background:#f0ede8; border-color:#c13b2b; color:#c13b2b; transform:translateX(-3px); }
+        
+        /* Smooth scroll and section offset - FIX */
+        html {
+            scroll-behavior: smooth;
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+        
         @media (max-width:768px) {
             .nav-toggle { display:block; }
-            .nav-links { display:none; flex-direction:column; position:absolute; top:70px; left:0; right:0; background:white; padding:1rem; border-bottom:1px solid #ece5df; }
+            .nav-links { display:none; flex-direction:column; position:absolute; top:70px; left:0; right:0; background:white; padding:1rem; border-bottom:1px solid #ece5df; box-shadow:0 8px 20px rgba(0,0,0,0.05); }
             .nav-links.open { display:flex; }
-            .events-grid { grid-template-columns:1fr; }
+            .nav-user { flex-direction:column; align-items:flex-start; margin:0.5rem 0; }
             .back-button-wrapper { margin-top:0; }
         }
     </style>
@@ -93,20 +103,24 @@ $flash = get_flash();
 <body>
 <nav class="navbar">
     <div class="nav-container">
-        <a href="<?= base_url('index.php') ?>" class="nav-brand">
-            <span class="brand-icon">◈</span>
+        <a href="#home" class="nav-brand">
+            <span class="brand-icon"><i class="fas fa-calendar-alt"></i></span>
             Campus<span class="brand-accent">EMS</span>
         </a>
         <button class="nav-toggle" id="navToggle">☰</button>
         <ul class="nav-links" id="navLinks">
-            <li><a href="<?= base_url('index.php') ?>" class="nav-link">Events</a></li>
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#features" class="nav-link">Features</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+
             <?php if (is_logged_in()): ?>
                 <?php if (current_role() === 'admin'): ?>
                     <li><a href="<?= base_url('admin/dashboard.php') ?>" class="nav-link">Admin Panel</a></li>
                 <?php elseif (current_role() === 'organizer'): ?>
                     <li><a href="<?= base_url('organizer/dashboard.php') ?>" class="nav-link">Dashboard</a></li>
                     <li><a href="<?= base_url('organizer/create_event.php') ?>" class="nav-link">Create Event</a></li>
-                    <li><a href="<?= base_url('organizer/profile.php') ?>" class="nav-link">My Profile</a></li>  <!-- added profile link -->
+                    <li><a href="<?= base_url('organizer/profile.php') ?>" class="nav-link">My Profile</a></li>
                 <?php else: ?>
                     <li><a href="<?= base_url('student/dashboard.php') ?>" class="nav-link">My Dashboard</a></li>
                 <?php endif; ?>
@@ -117,7 +131,7 @@ $flash = get_flash();
                 <li><a href="<?= base_url('logout.php') ?>" class="nav-link nav-logout">Log Out</a></li>
             <?php else: ?>
                 <li><a href="<?= base_url('login.php') ?>" class="nav-link">Log In</a></li>
-                <li><a href="<?= base_url('register.php') ?>" class="btn btn-primary btn-sm">Register</a></li>
+                <li><a href="<?= base_url('register.php') ?>" class="btn btn-primary btn-sm">Sign Up</a></li>
             <?php endif; ?>
         </ul>
     </div>
