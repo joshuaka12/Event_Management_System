@@ -77,7 +77,7 @@ require_once __DIR__ . '/../includes/header.php';
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group"><label class="form-label">Full Name</label><input type="text" name="name" class="form-control" value="<?= e($user['name']) ?>" required></div>
             <div class="form-group"><label class="form-label">Email Address</label><input type="email" name="email" class="form-control" value="<?= e($user['email']) ?>" required></div>
-            <div class="form-group"><label class="form-label">Contact Number</label><input type="text" name="contact_number" class="form-control" value="<?= e($user['contact_number']) ?>"></div>
+            <div class="form-group"><label class="form-label">Contact Number</label><input type="text" name="contact_number" max = "10" class="form-control" value="<?= e($user['contact_number']) ?>"></div>
             <div class="form-group"><label class="form-label">Position/Role</label><input type="text" name="position" class="form-control" value="<?= e($user['position']) ?>" placeholder="e.g., Event Coordinator"></div>
             <div class="form-group"><label class="form-label">Profile Picture</label>
                 <?php if ($user['profile_pic']): ?><img src="<?= base_url(ltrim($user['profile_pic'], '/')) ?>" style="width: 80px; border-radius: 50%;"><br><?php endif; ?>
