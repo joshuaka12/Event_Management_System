@@ -59,7 +59,7 @@ require_once __DIR__ . '/includes/header.php';
         <p class="hero-subtitle">Discover workshops, seminars, cultural nights, career fairs and more happening across campus.</p>
         <?php if (!is_logged_in()): ?>
         <div class="hero-buttons">
-            <a href="<?= base_url('register.php') ?>" class="btn btn-primary btn-lg">Join Now — It's Free</a>
+            <a href="<?= base_url('register.php') ?>" class="btn btn-primary btn-lg">Join Now — It's Free for Early Birds</a>
             <a href="<?= base_url('login.php') ?>" class="btn btn-outline-light btn-lg">Log In</a>
         </div>
         <?php endif; ?>
