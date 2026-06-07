@@ -1,4 +1,4 @@
-For a GitHub repository, it's usually better to write the README in a more natural and conversational style rather than sounding like generated documentation. Here's a rewritten version:
+
 
 # 🎓 Campus Event Management System (Campus EMS)
 
@@ -6,7 +6,7 @@ Campus EMS is a web-based application designed to help universities and colleges
 
 Built using **PHP, MySQL, HTML, CSS, and JavaScript**, the project does not rely on any frameworks, making it easy to understand, customize, and deploy.
 
-## ✨ Features
+##  Features
 
 ### Administrator
 
