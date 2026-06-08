@@ -112,15 +112,7 @@ Start Apache and MySQL, then visit:
 http://localhost/campus_ems/
 ```
 
-## 🔑 Demo Accounts
 
-For testing purposes, the following accounts are included:
-
-| Role      | Email                                               | Password |
-| --------- | --------------------------------------------------- | -------- |
-| Admin     | [admin@campus.edu](mailto:admin@campus.edu)         | password |
-| Organizer | [organizer@campus.edu](mailto:organizer@campus.edu) | password |
-| Student   | [student@campus.edu](mailto:student@campus.edu)     | password |
 
 ## 🎨 User Experience
 
